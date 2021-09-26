@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create a new article
+{% endblock %}
+
+{% block body %}
+
+<form action="{% url 'save' %}" method="post">{% csrf_token %}
+    {% if duplicate %}
+        <p><b>{{ article_title }} was taken, try again!!!</b></p>    
+    {% else %}
+        <p><b>Create a new article</b></p>
+    {% endif %}    
+    Title: <br>
+        <input type="text" name="article_title" style="width:60%;"><br>
+    Content: <br>
+        <textarea name="article_content" style="width:60%; height:500px">{% if duplicate %}{{ article_content }}{% endif %}</textarea><br>        
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
